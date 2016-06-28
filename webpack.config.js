@@ -1,3 +1,5 @@
+var WriteFilePlugin = require('write-file-webpack-plugin');
+
 module.exports = {
   entry: [
     './src/index.js'
@@ -16,11 +18,15 @@ module.exports = {
       }
     }]
   },
+  plugins: [
+    new WriteFilePlugin()
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './'
+    contentBase: './',
+    outputPath: __dirname
   }
 };

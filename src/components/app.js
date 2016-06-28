@@ -1,9 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import SideBar from './sidebar';
+import Toolbar from './toolbar';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>React simple starter</div>
-    );
-  }
-}
+const mapStateToProps = (props, { params: { deckId } }) => ({
+	deckId
+});
+
+const App = ({ deckId, children }) => {
+  return (
+	  <div className="app">
+	  	<Toolbar deckId={deckId} />
+	  	<SideBar />
+	  	<div className="content">
+	  		{deckId ? <h1>Deck {deckId}</h1> : ''}
+		  	{children}
+		  </div>
+	  </div>
+	);
+};
+export default connect(mapStateToProps)(App);
